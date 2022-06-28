@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    margin-bottom: 17px;
+}
+
+.popup__connect__text {
+    word-break: break-all;
+    margin-bottom: 27px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #505050;
+}
+
+.wallet__popup__connect__icon {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #262626;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
+    height: 60px;
+    background: linear-gradient(70deg, #262626 0%, #242424 100%, #1B1A1A 180.07%);
+    color: inherit;
+}
+
+.wallet__popup__connect__icon:hover {
+    background: transparent;
+    border: 1px solid #262626;
+}
+
+.icon__image {
+    width: 32px;
+    filter: brightness(0) invert(1);
+}
