@@ -1,0 +1,137 @@
+.outer {
+  padding: 0px 20px;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.section__itle {
+  text-align: center;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 49px;
+}
+
+
+.activity {
+  background-color: #191921;
+  padding-top: 100px;
+
+  &__headers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  &__container {
+  }
+
+  &__table {
+    width: 100%;
+  }
+
+  &__body {
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-around;
+    background: #1C1C24;
+    border: 1px solid #272731;
+    border-radius: 50px;
+    padding: 53px 0px;
+    align-items: center;
+    animation: show 2s;
+
+    &:not(:last-child){
+      margin-bottom: 19px;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(155.06deg, #FFAB09 0.33%, #FF5C00 94.55%);
+    border-radius: 28px;
+    padding: 11px 0px;
+    justify-content: space-around;
+    margin-bottom: 52px;
+  }
+
+  &__item {
+    text-align: center;
+    &_time{
+      flex: 1 1 342px;
+    }
+    &_wallet{
+      flex: 1 1 335px;
+    }
+    &_amount{
+      flex: 1 1 239px;
+    }
+    &_status{
+      flex: 1 1 224px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__icon{
+    width: 54px;
+    height: 54px;
+    background: #23232D;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img{
+      width: 25px;
+      height: 25px;
+    }
+  }
+}
+
+
+.live {
+  display: inline-flex;
+  align-items: center;
+  background: #1C1C25;
+  border-radius: 4px;
+  padding: 10px 30px;
+  margin-left: 39px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  text-transform: uppercase;
+
+  &__status{
+    margin-right: 12px;
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    background: #05FF00;
+    border-radius: 50%;
+    animation: blink 2s linear infinite;
+  }
+}
+
+@keyframes blink {
+  0% {background-color: transparent;}
+  50% {background-color: #05FF00;}
+  100% {background-color: transparent;}
+}
+
+@keyframes show{
+  0%{
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
+  }
+}

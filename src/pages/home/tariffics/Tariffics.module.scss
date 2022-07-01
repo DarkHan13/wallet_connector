@@ -1,0 +1,224 @@
+.outer {
+  padding: 0px 20px;
+}
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+
+
+.tariffics {
+  background: #191921;
+  padding-top: 100px;
+
+  .section__title{
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 49px;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    column-gap: 23px;
+    position: relative;
+
+    &::after,
+    &::before{
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: linear-gradient(155.06deg, #FFAB09 0.33%, #FF5C00 94.55%);
+      filter: blur(250px);
+      opacity: .3;
+    }
+
+    &::after{
+      top: 0;
+      right: -40%;
+    }
+
+    &::before{
+      bottom: 0;
+      left: -40%;
+    }
+  }
+
+  &__card {
+    flex: 0 1 33.333%;
+  }
+}
+
+.card__tariffics {
+  border-radius: 9px;
+  border-width: 1px;
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  &__percent{
+    position: absolute;
+    top: -10px;
+    left: -15px;
+    padding: 7px 37px 12px 37px;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 39px;
+    border-radius: 15px 15px 15px 0px;
+
+    &::before{
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 16px 16px 0;
+    }
+  }
+
+  &_bronze {
+    border-color: #CD7F32;
+
+    .card__tariffics__percent{
+      background: linear-gradient(132.53deg, #FBA54F -0.31%, #BF5B24 78.3%);
+    }
+
+    .card__tariffics__percent::before{
+      border-color: transparent #5E3A17 transparent transparent;
+    }
+  }
+
+  &_silver {
+    border-color: #C0C0C0;
+
+    .card__tariffics__percent{
+      background: linear-gradient(180.55deg, #C0C0C0 0.48%, #444444 132.35%);
+    }
+
+    .card__tariffics__percent::before{
+      border-color: transparent #3E3E3E transparent transparent;
+    }
+  }
+
+  &_gold {
+    border-color: #F3DC7E;
+
+    .card__tariffics__percent{
+      background: linear-gradient(175.55deg, #F3DC7E -31.88%, #FF8A00 143.32%);
+    }
+
+    .card__tariffics__percent::before{
+      border-color: transparent #7A5719 transparent transparent;
+    }
+  }
+
+  &__profit{
+    margin-bottom: 6px;
+  }
+
+  &__profit,
+  &_days {
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 145.9%;
+  }
+
+  &_days {
+    margin-bottom: 66px;
+  }
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    margin-bottom: 40px;
+    position: relative;
+
+    &::after{
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4F4F4F;
+      width: 80%;
+      height: 1px;
+    }
+  }
+
+  &__img {
+    width: 190px;
+    height: 190px;
+
+    img{
+      max-width: 100%;
+    }
+  }
+
+  &__body {
+    padding-bottom: 85px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    margin-bottom: 45px;
+  }
+
+  &__button {
+
+  }
+}
+
+@media (max-width: 992.98px){
+  .tariffics{
+    &__container{
+      display: flex;
+      flex-direction: column;
+      column-gap: 0;
+      row-gap: 23px;
+    }
+
+    &__card{
+      flex: 1 1 auto;
+      width: 100%;
+      max-width: 380px;
+    }
+  }
+}
+
+.button_color_gold{
+  color: white;
+  background: linear-gradient(177.64deg, #F3DC7E -28.53%, #FF9900 146.61%);
+  padding: 11px 65px;
+  border-radius: 7px;
+}
+.button_color_silver{
+  color: white;
+  background: linear-gradient(180.55deg, #C0C0C0 0.48%, #444444 132.35%);
+  padding: 11px 65px;
+  border-radius: 7px;
+}
+
+.button_color_bronze{
+  color: white;
+  background: linear-gradient(137.2deg, #FBA54F 15.88%, #CD7F32 80%);
+  padding: 11px 65px;
+  border-radius: 7px;
+}

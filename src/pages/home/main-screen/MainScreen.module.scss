@@ -1,0 +1,167 @@
+.outer {
+    padding: 0px 20px;
+}
+
+.container {
+    max-width: 1180px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.gradient__text {
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(155.06deg, #FFAB09 0.33%, #FF5C00 94.55%);
+}
+
+
+.button_size_sm {
+    padding: 10px 27px;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+}
+.button_gradient {
+    display: inline-block;
+    background: linear-gradient(145.9deg, #FF7D04 1.24%, #FF4F04 66.46%);
+    border: 1px solid #FF7004;
+    transition: 0.3s;
+}
+
+.button {
+    text-align: center;
+    color: #fff;
+    border-radius: 59px;
+    padding: 15px 62px;
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: 600;
+}
+
+
+.button_gradient:hover {
+    color: #FF7004;
+    border: 1px solid #FF7004;
+    background: none;
+}
+
+.button_border {
+    color: #FF7004;
+    border: 1px solid #FF7004;
+    padding: 15px 46px;
+    transition: 0.3s;
+}
+.button_border:hover {
+    color: #fff;
+    background: linear-gradient(145.9deg, #FF7D04 1.24%, #FF4F04 66.46%);
+}
+.main__screen {
+    min-height: 100vh;
+    display: flex;
+    background:  100%/cover no-repeat;
+    background-image: url('../../../images/main-screen/main-screen-bg.jpg');
+    background-position: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    &__container {
+        padding-top: 77px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__offer {
+        flex: 0 1 700px;
+    }
+
+    &__title {
+        font-weight: 700;
+        font-size: 55px;
+        line-height: 67px;
+        margin-bottom: 19px;
+
+        .gradient__text{
+            position: relative;
+
+            &::after{
+                content: '';
+                position: absolute;
+                top: -35px;
+                right: -70px;
+                width: 70px;
+                height: 70px;
+                background-image: url('../../../images/main-screen/stars.png');
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+    }
+
+    &__text {
+        margin-bottom: 50px;
+        width: 100%;
+        max-width: 600px;
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 27px;
+        color: #9B9B9B;
+    }
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+    }
+
+    &__button {
+        flex: 0 1 200px;
+        a{
+            display: block;
+            width: 100%;
+            padding: 15px 0px;
+        }
+        &:not(:last-child){
+            margin-right: 15px;
+        }
+    }
+}
+
+@media(max-width: 1200.98px){
+    .main__screen{
+        position: relative;
+
+        &__bg{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 80%);
+        }
+
+        &__container{
+            position: relative;
+            z-index: 10;
+        }
+    }
+}
+
+@media(max-width: 768.98px){
+    .main__screen{
+        &__title{
+            font-size: 38px;
+            line-height: 40px;
+
+            .gradient-text::after{
+                width: 35px;
+                height: 35px;
+                top: -17.5px;
+                right: -35px;
+            }
+        }
+        &__text{
+            font-size: 18px;
+        }
+    }
+}

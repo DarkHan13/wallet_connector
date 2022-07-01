@@ -1,13 +1,11 @@
 import {Web3ReactProvider} from "@web3-react/core";
 import {Web3Provider} from "@ethersproject/providers";
-import WalletPopup from "./pages/popup/WalletPopup";
-import {useState} from "react";
-import ContentWallet from "./pages/popup/contentWallet";
-import Main from "./pages/main/Main";
+import Home from "./pages/home/Home";
+import './App.css'
 
-window.onload = function () {
-    localStorage.clear();
-}
+// window.onload = function () {
+//     localStorage.clear();
+// }
 
 function App() {
 
@@ -21,7 +19,7 @@ function App() {
     return (
         <Web3ReactProvider getLibrary={getLibrary}>
             <div>
-                <Main />
+                <Home />
             </div>
         </Web3ReactProvider>
     );

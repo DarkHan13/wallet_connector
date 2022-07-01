@@ -1,0 +1,212 @@
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  justify-content: center;
+  display: none;
+
+  &_active{
+    display: flex;
+  }
+
+  &__body {
+    background: linear-gradient(185.1deg, #171717 -4.29%, #0D0D0D 95.9%);
+    position: relative;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__close {
+    cursor: pointer;
+    position: absolute;
+    top: 22px;
+    right: 33px;
+    width: 22px;
+    height: 22px;
+
+    &::before,
+    &::after{
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: rotate(0) translateY(-50%);
+      width: 100%;
+      height: 1px;
+      background-color: #606060;
+      transition: .3s;
+    }
+
+    &::before{
+      transform: rotate(45deg);
+    }
+
+    &::after{
+      transform: rotate(-45deg);
+    }
+
+    &:hover::before,
+    &:hover::after{
+      background-color: #fff;
+    }
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    margin-bottom: 17px;
+  }
+}
+
+@media (max-width: 992.98px){}
+
+@media (max-width: 768.98px){}
+
+@media (max-width: 576.98px){}
+
+.popup__choose {
+  &__body {
+    padding: 76px 0px;
+    flex: 0 1 850px;
+  }
+
+  &__close {
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: 39px;
+  }
+
+  &__tariffics {
+    margin-bottom: 28px;
+  }
+
+  &__stakes {
+    display: flex;
+    column-gap: 12px;
+    margin-bottom: 42px;
+  }
+
+  &__receive,
+  &__stake{
+    border-radius: 6px;
+  }
+
+  &__receive {
+    border: 1px solid #373737;
+
+    input{
+      flex: 1 0 auto;
+      padding: 18px 58px;
+      width: 100%;
+      background: transparent;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: inherit;
+    }
+  }
+
+  &__stake {
+    padding: 18px 60px;
+    cursor: pointer;
+    background: linear-gradient(145.9deg, #FF7D04 1.24%, #FF4F04 66.46%);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  &__values {
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__get,
+  &__profit {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.tariffics__popup__choose {
+  display: flex;
+  align-items: stretch;
+  column-gap: 18px;
+
+  &__col {
+    cursor: pointer;
+    flex: 0 1 33.333%;
+    text-align: center;
+    background: #181818;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: .3s;
+
+    &._active{
+      border: 1px solid #FF7004;
+    }
+  }
+
+  &__tariff {
+    padding: 11px 54px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    background: linear-gradient(180deg, #262626 0%, #242424 0.01%, #1B1A1A 116.07%);
+    border-radius: 5px;
+  }
+
+  &__values {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    color: #707070;
+    padding: 8px 0px;
+  }
+}
+
+@media (max-width: 992.98px){
+  .popup__choose{
+    &__body{
+      margin: 0px 20px;
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+  }
+}
+
+@media (max-width: 768.98px){
+  .popup__choose{
+    &__title{
+      font-size: 24px;
+    }
+
+    &__stakes {
+      flex-direction: column;
+      row-gap: 20px;
+    }
+  }
+
+  .tariffics__popup__choose{
+    flex-direction: column;
+
+    &__col + &__col{
+      margin-top: 20px;
+    }
+  }
+}
