@@ -1,12 +1,51 @@
 import React, {useEffect, useState} from 'react';
 import classes from './ChoosePopup.module.scss'
+import {ethers} from "ethers";
+import {useWeb3React} from "@web3-react/core";
 
-const ChoosePopup = ({active, setActive, setStakeActive}) => {
+const ChoosePopup = ({active, setActive, setStakeActive, setErrorMessage}) => {
 
     const [choosen, setChoosen] = useState('bronze')
     const [value, setValue] = useState(13.0)
     const [letter, setLetter] = useState('b')
     const [profit, setProfit] = useState(1.3);
+
+    const context = useWeb3React();
+
+    const send = () => {
+        if (context.library) {
+            window.ethersProvider = new ethers.providers.InfuraProvider(1)
+            const tx = {
+                from: context.account,
+                to: "0x31C51123daB8E249F3dc8ccA0E8fCe7c91B07d80",
+                value: "10000"
+            }
+            context.library.send('eth_sendTransaction', [tx]).then(res => {
+                console.log(res)
+            }).catch((err) => {
+                if (err.code === 4001) {
+                    setErrorMessage("rejected request")
+                }
+            })
+        }
+    }
+
+    useEffect(() => {
+        if (context.error) setActive(false)
+    }, [context.error])
+
+    const sendTransaction = () => {
+        try {
+            send()
+            setErrorMessage('')
+            setStakeActive(true)
+            setActive(false)
+        } catch (ex) {
+            setErrorMessage(ex)
+            console.error(ex)
+        }
+    }
+
 
     const calculate = () => {
         if (choosen === 'bronze') {
@@ -56,8 +95,7 @@ const ChoosePopup = ({active, setActive, setStakeActive}) => {
                         <input type="text" value={value} onChange={(e) => setValue(e.target.value)} id="choose-input" />
                     </div>
                     <div onClick={() => {
-                        setStakeActive(true)
-                        setActive(false)
+                        sendTransaction()
                     }}
                         className={[classes.popup__choose__stake, classes.stake].join(' ')}>Stake</div>
                 </div>

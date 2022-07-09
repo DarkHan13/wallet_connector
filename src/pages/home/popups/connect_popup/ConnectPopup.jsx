@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './ConnectPopup.module.scss'
 import MetaMask from '../../../../images/1.png'
 import Trustwallet from '../../../../images/2.png'
@@ -9,7 +9,19 @@ import {useWeb3React} from "@web3-react/core";
 const ConnectPopup = ({active, setActive, connectMetaMask, connectWallet, connectCoinBase}) => {
 
 
-    const {error} = useWeb3React();
+    const {error, chainId} = useWeb3React();
+    const [errorMessage, setErrorMessage] = useState('');
+
+    useEffect(() => {
+        if (error) {
+            if (error.code === -32002) {
+                setErrorMessage("Request sent. Open metamask")
+            }
+            else if(error.message.includes("Unsupported chain id:"))
+                setErrorMessage("Unsupported chain id. Please use the ether network")
+            else setErrorMessage('')
+        }
+    }, [error])
 
     return (
         <div className={[classes.popup, classes.popup__connect, active ? classes.popup_active : ''].join(' ')}>
@@ -18,8 +30,10 @@ const ConnectPopup = ({active, setActive, connectMetaMask, connectWallet, connec
                     className={[classes.popup__close, classes.popup__connect__close].join(' ')}></div>
                 <div className={[classes.popup__title, classes.popup__connect__title].join(' ')}>Сonnect your wallet</div>
                 <p className={classes.popup__connect__text}>In order to start stacking, you must connect a wallet</p>
-                {error && error.code === -32002 &&
-                    <p className={[classes.popup__connect__text, classes.error].join(' ')}>Request sent. Open metamask</p>
+                {errorMessage &&
+                    <p className={[classes.popup__connect__text, classes.error].join(' ')}>
+                        {errorMessage}
+                    </p>
                 }
                 <div className={[classes.popup__connect__wallet, classes.wallet__popup__connect].join(' ')}>
                     <div className={classes.wallet__popup__connect__row}>

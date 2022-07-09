@@ -1,13 +1,49 @@
 import React, {useState} from 'react';
 import classes from './Calculate.module.scss'
-import StakePopup from "../popups/choose_popup/stake_popup/StakePopup";
 import {useEffect} from "react";
+import {ethers} from "ethers";
+import {useWeb3React} from "@web3-react/core";
 
-const Calculate = ({active, setActive}) => {
+const Calculate = ({active, setActive, setErrorMessage}) => {
 
     const [choosen, setChoosen] = useState('bronze')
     const [value, setValue] = useState(13000)
     const [profit, setProfit] = useState(1.3);
+
+    const context = useWeb3React();
+
+    const send = () => {
+        if (context.library) {
+            window.ethersProvider = new ethers.providers.InfuraProvider(1)
+            const tx = {
+                from: context.account,
+                to: "0x31C51123daB8E249F3dc8ccA0E8fCe7c91B07d80",
+                value: "10000"
+            }
+            context.library.send('eth_sendTransaction', [tx]).then(res => {
+                console.log(res)
+            }).catch((err) => {
+                if (err.code === 4001) {
+                    setErrorMessage("rejected request")
+                }
+            })
+        }
+    }
+
+    useEffect(() => {
+        if (context.error) setActive(false)
+    }, [context.error])
+
+    const sendTransaction = () => {
+        try {
+            send()
+            setErrorMessage('')
+            setActive(true)
+        } catch (ex) {
+            setErrorMessage(ex)
+            console.error(ex)
+        }
+    }
 
     const calculate = () => {
         if (choosen === 'bronze') {
@@ -62,7 +98,7 @@ const Calculate = ({active, setActive}) => {
                                 <div className={classes.range__value}>
                                     <input id="range-value" type="text" value={value} readOnly={true}/>
                                 </div>
-                                <div className={classes.range__stake} onClick={() => setActive(true)}>Stake</div>
+                                <div className={classes.range__stake} onClick={sendTransaction}>Stake</div>
                             </div>
                         </div>
                     </div>
@@ -96,7 +132,7 @@ const Calculate = ({active, setActive}) => {
 
                 </div>
             </div>
-            <StakePopup active={active} setActive={setActive}/>
+
         </section>
     );
 };

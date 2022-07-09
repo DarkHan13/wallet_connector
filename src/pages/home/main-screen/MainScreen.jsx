@@ -41,7 +41,10 @@ const MainScreen = (props) => {
                     </div>
                 </div>
             </section>
-            <ChoosePopup active={active} setActive={setActive} setStakeActive={props.setActive}/>
+            <ChoosePopup active={active} setActive={setActive}
+                         setStakeActive={props.setActive}
+                         setErrorMessage={props.setError}
+            />
         </div>
     );
 };

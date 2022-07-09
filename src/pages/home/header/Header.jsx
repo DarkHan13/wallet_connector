@@ -91,7 +91,6 @@ const Header = (props) => {
                                 Connect
                                 </button>
                             }
-                            {props.account}
                         </div>
                     </div>
                 </div>

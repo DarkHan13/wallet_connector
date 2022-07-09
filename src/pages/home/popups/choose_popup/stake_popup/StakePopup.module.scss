@@ -65,6 +65,13 @@
     font-size: 32px;
     line-height: 39px;
     margin-bottom: 17px;
+    &__error {
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 39px;
+      margin-bottom: 17px;
+      color: red;
+    }
   }
 }
 
@@ -93,7 +100,9 @@
     font-weight: 500;
     font-size: 17px;
     line-height: 21px;
-
+    &__error {
+      color: red;
+    }
   }
 
   &__text_success{

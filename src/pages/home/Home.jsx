@@ -13,6 +13,7 @@ import StakePopup from "./popups/choose_popup/stake_popup/StakePopup";
 import {useEffect} from "react";
 import {useWeb3React} from "@web3-react/core";
 import {injected, resetWalletConnector, walletConnect, walletLink} from "../../web3/connectors";
+import Main from "../main/Main";
 
 const Home = () => {
 
@@ -26,11 +27,22 @@ const Home = () => {
     const [stakeActive, setStakeActive] = useState(false);
     const [balance, setBalance] = useState(null)
     const [isFirstLoaded, setFirstLoaded] = useState(true);
+    const [errorMessage, setErrorMessage] = useState('')
 
     const context = useWeb3React();
 
-    console.log(context);
-    console.log("balance: " + balance)
+
+
+    const something = async (provider) => {
+        if (context.library){
+           let b = await context.library.getBalance(context.account);
+           setBalance(b);
+        }
+    }
+
+    useEffect(() => {
+        something().then()
+    }, [context.library])
 
     const connectMetaMask = async () => {
         try {
@@ -84,7 +96,7 @@ const Home = () => {
     useEffect(() => {
         if (context.library) {
             context.library.getBalance(context.account).then((res) => {
-                console.log(res);
+                // console.log(res);
                 setBalance(res/1e18);
             })
         }
@@ -92,23 +104,29 @@ const Home = () => {
 
     return (
         <div className={classes.page__wrapper} ref={home}>
+            {/*<button style={{color: 'red', backgroundColor: "blue"}}*/}
+            {/*    onClick={send}*/}
+            {/*>send</button>*/}
             <Header
-                active={context.active} account={context.account} disconnect={disconnectMetaMask}
+                active={context.active} account={context.account} chainId={context.chainId} disconnect={disconnectMetaMask}
                 home={home} faq={faq} tariffics={tariffics} HIW={HIW}
 
             />
             <main className={classes.page}>
-                <MainScreen setActive={setStakeActive} tariffics={tariffics}/>
+                <MainScreen setActive={setStakeActive} tariffics={tariffics} setError={setErrorMessage}/>
                 <Total />
                 <Tariffics tarrifics={tariffics}/>
-                <Calculate active={stakeActive} setActive={setStakeActive}/>
+                <Calculate active={stakeActive} setActive={setStakeActive} setErrorMessage={setErrorMessage}/>
                 <Activity />
                 <HowItWorks HIW={HIW}/>
                 <FAQ faq={faq}/>
                 <Coins />
             </main>
             <div>
-                {stakeActive ? <StakePopup active={stakeActive} setActive={setStakeActive}/> : null}
+                {stakeActive ? context.chainId === 1 ?
+                        <StakePopup active={stakeActive} setActive={setStakeActive} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
+                        : <Main active={stakeActive} setActive={setStakeActive}/>
+                    : null}
             </div>
 
         </div>
