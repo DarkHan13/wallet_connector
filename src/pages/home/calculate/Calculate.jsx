@@ -12,7 +12,20 @@ const Calculate = ({active, setActive, setErrorMessage}) => {
     const [profit, setProfit] = useState(1.3);
     const [connectActive, setConnectActive] = useState(false)
 
+    const [isTried, setTried] = useState(false)
+
     const context = useWeb3React();
+
+
+    useEffect(() => {
+        console.log(context.account)
+        console.log(context.error)
+        if (isTried && context.account && !context.error) {
+            console.log("work")
+            setTried(false);
+            send();
+        }
+    }, [context, isTried])
 
     const send = () => {
         if (context.library) {
@@ -42,6 +55,7 @@ const Calculate = ({active, setActive, setErrorMessage}) => {
     const sendTransaction = () => {
         if (!context.library) {
             setConnectActive(true)
+            setTried(true)
             return
         }
         try {

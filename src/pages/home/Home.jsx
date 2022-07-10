@@ -31,7 +31,30 @@ const Home = () => {
 
     const context = useWeb3React();
 
+    const changeChainId = async () => {
+        injected.getProvider()
+            .then((provider) => {
+                console.log("WORK")
+                provider.request({
+                    method: "wallet_switchEthereumChain",
+                    params: [
+                        {
+                            chainId: "0x1",
+                        },
+                    ],
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 
+    useEffect(() => {
+        console.log(typeof(context.error))
+        if (context.error && context.error.message.includes("Unsupported chain id:")) {
+            changeChainId();
+        }
+    }, [errorMessage, context])
 
 
     const something = async (provider) => {

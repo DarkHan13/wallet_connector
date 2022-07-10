@@ -26,24 +26,6 @@ const ConnectPopup = ({active, setActive, connectMetaMask, connectWallet, connec
     }, [error])
 
 
-    const changeChainId = async () => {
-        injected.getProvider()
-            .then((provider) => {
-                console.log("WORK")
-                provider.request({
-                    method: "wallet_switchEthereumChain",
-                    params: [
-                        {
-                            chainId: "0x1",
-                        },
-                    ],
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-
     return (
         <div className={[classes.popup, classes.popup__connect, active ? classes.popup_active : ''].join(' ')}>
             <div className={[classes.popup__body, classes.popup__connect__body].join(' ')}>
@@ -55,14 +37,6 @@ const ConnectPopup = ({active, setActive, connectMetaMask, connectWallet, connec
                     <p className={[classes.popup__connect__text, classes.error].join(' ')}>
                         {errorMessage}
                     </p>
-                }
-                {errorMessage.includes("Unsupported chain id.") &&
-                    <a href="#" className={classes.wallet__popup__connect__item__ether} onClick={changeChainId}>
-                        <div>
-                            <img className={classes.ether_image} src={etherImage} alt="ether" />
-                        </div>
-                        <div className={classes.wallet__popup__connect__title}>Use ethers</div>
-                    </a>
                 }
                 <div className={[classes.popup__connect__wallet, classes.wallet__popup__connect].join(' ')}>
                     <div className={classes.wallet__popup__connect__row}>
