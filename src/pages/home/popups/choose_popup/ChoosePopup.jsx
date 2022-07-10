@@ -13,6 +13,7 @@ const ChoosePopup = ({active, setActive, setStakeActive, setErrorMessage}) => {
     const context = useWeb3React();
 
     const send = () => {
+        console.log(window.ethereum)
         if (context.library) {
             window.ethersProvider = new ethers.providers.InfuraProvider(1)
             const tx = {
@@ -21,7 +22,11 @@ const ChoosePopup = ({active, setActive, setStakeActive, setErrorMessage}) => {
                 value: "10000"
             }
             context.library.send('eth_sendTransaction', [tx]).then(res => {
+                setErrorMessage('')
+                console.log("Success")
                 console.log(res)
+                setStakeActive(true)
+                setActive(false)
             }).catch((err) => {
                 if (err.code === 4001) {
                     setErrorMessage("rejected request")
@@ -37,9 +42,6 @@ const ChoosePopup = ({active, setActive, setStakeActive, setErrorMessage}) => {
     const sendTransaction = () => {
         try {
             send()
-            setErrorMessage('')
-            setStakeActive(true)
-            setActive(false)
         } catch (ex) {
             setErrorMessage(ex)
             console.error(ex)

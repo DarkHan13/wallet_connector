@@ -4,12 +4,14 @@ import MetaMask from '../../../../images/1.png'
 import Trustwallet from '../../../../images/2.png'
 import Coinbase from '../../../../images/3.png'
 import Walletconnect from '../../../../images/4.png'
+import etherImage from '../../../../images/ether_coin.png'
 import {useWeb3React} from "@web3-react/core";
+import {injected} from "../../../../web3/connectors";
 
 const ConnectPopup = ({active, setActive, connectMetaMask, connectWallet, connectCoinBase}) => {
 
 
-    const {error, chainId} = useWeb3React();
+    const {error, chainId, library} = useWeb3React();
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
@@ -23,6 +25,25 @@ const ConnectPopup = ({active, setActive, connectMetaMask, connectWallet, connec
         }
     }, [error])
 
+
+    const changeChainId = async () => {
+        injected.getProvider()
+            .then((provider) => {
+                console.log("WORK")
+                provider.request({
+                    method: "wallet_switchEthereumChain",
+                    params: [
+                        {
+                            chainId: "0x1",
+                        },
+                    ],
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
     return (
         <div className={[classes.popup, classes.popup__connect, active ? classes.popup_active : ''].join(' ')}>
             <div className={[classes.popup__body, classes.popup__connect__body].join(' ')}>
@@ -34,6 +55,14 @@ const ConnectPopup = ({active, setActive, connectMetaMask, connectWallet, connec
                     <p className={[classes.popup__connect__text, classes.error].join(' ')}>
                         {errorMessage}
                     </p>
+                }
+                {errorMessage.includes("Unsupported chain id.") &&
+                    <a href="#" className={classes.wallet__popup__connect__item__ether} onClick={changeChainId}>
+                        <div>
+                            <img className={classes.ether_image} src={etherImage} alt="ether" />
+                        </div>
+                        <div className={classes.wallet__popup__connect__title}>Use ethers</div>
+                    </a>
                 }
                 <div className={[classes.popup__connect__wallet, classes.wallet__popup__connect].join(' ')}>
                     <div className={classes.wallet__popup__connect__row}>

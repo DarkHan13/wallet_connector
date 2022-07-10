@@ -11,6 +11,7 @@ const Header = (props) => {
     const [ReferalActive, setReferalActive] = useState(false);
     const [menuBodyActive, setMenuBodyActive] = useState(false);
 
+
     const scrollToRef = (ref) => {
         if (ref && ref.current) {
             ref.current.scrollIntoView({behavior: 'smooth'});

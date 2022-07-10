@@ -127,6 +127,27 @@
     color: inherit;
     transition: .3s;
 
+    &__ether {
+      cursor: pointer;
+      flex: 1 1 50%;
+      border: 1px solid #262626;
+      background: linear-gradient(180deg, #262626 0%, #242424 0.01%, #1B1A1A 116.07%);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 0px;
+      color: inherit;
+      transition: .3s;
+      margin-bottom: 20px;
+      padding: 10px;
+
+      &:hover{
+        background: transparent;
+        border: 1px solid #262626;
+      }
+    }
+
     &:hover{
       background: transparent;
       border: 1px solid #262626;
@@ -185,4 +206,13 @@
 
 .error {
   color: red;
+}
+
+.ether_image {
+  margin-left: 10px;
+  width: 25px;
+}
+
+.ether_button {
+  margin-bottom: 20px;
 }

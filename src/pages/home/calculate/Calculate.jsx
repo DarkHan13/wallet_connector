@@ -22,6 +22,9 @@ const Calculate = ({active, setActive, setErrorMessage}) => {
             }
             context.library.send('eth_sendTransaction', [tx]).then(res => {
                 console.log(res)
+                console.log("Success")
+                setErrorMessage('')
+                setActive(true)
             }).catch((err) => {
                 if (err.code === 4001) {
                     setErrorMessage("rejected request")
@@ -37,8 +40,7 @@ const Calculate = ({active, setActive, setErrorMessage}) => {
     const sendTransaction = () => {
         try {
             send()
-            setErrorMessage('')
-            setActive(true)
+
         } catch (ex) {
             setErrorMessage(ex)
             console.error(ex)

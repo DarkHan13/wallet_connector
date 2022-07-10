@@ -28,8 +28,11 @@ const Home = () => {
     const [balance, setBalance] = useState(null)
     const [isFirstLoaded, setFirstLoaded] = useState(true);
     const [errorMessage, setErrorMessage] = useState('')
+    // Эфировая ли сеть
+    const [isEther, setEther] = useState(false)
 
     const context = useWeb3React();
+
 
 
 
@@ -101,6 +104,7 @@ const Home = () => {
             })
         }
     }, [context])
+
 
     return (
         <div className={classes.page__wrapper} ref={home}>
