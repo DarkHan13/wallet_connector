@@ -15,6 +15,7 @@ const ConnectPopup = ({active, setActive, connectMetaMask, connectWallet, connec
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
+        console.log("WORK")
         if (error) {
             if (error.code === -32002) {
                 setErrorMessage("Request sent. Open metamask")
@@ -22,7 +23,7 @@ const ConnectPopup = ({active, setActive, connectMetaMask, connectWallet, connec
             else if(error.message.includes("Unsupported chain id:"))
                 setErrorMessage("Unsupported chain id. Please use the ether network")
             else setErrorMessage('')
-        }
+        } else setErrorMessage('')
     }, [error])
 
 

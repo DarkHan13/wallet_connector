@@ -34,7 +34,7 @@ const Home = () => {
     const changeChainId = async () => {
         injected.getProvider()
             .then((provider) => {
-                console.log("WORK")
+                setErrorMessage('')
                 provider.request({
                     method: "wallet_switchEthereumChain",
                     params: [
@@ -42,7 +42,7 @@ const Home = () => {
                             chainId: "0x1",
                         },
                     ],
-                });
+                }).then(() => setErrorMessage(''));
             })
             .catch((error) => {
                 console.log(error);
@@ -93,6 +93,10 @@ const Home = () => {
             console.log(ex);
         }
     }
+
+    useEffect(() => {
+        if (!context.error) setErrorMessage('')
+    }, [context.error])
 
 
     useEffect(() => {

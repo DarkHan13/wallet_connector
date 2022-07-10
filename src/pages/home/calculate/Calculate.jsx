@@ -4,6 +4,7 @@ import {useEffect} from "react";
 import {ethers} from "ethers";
 import {useWeb3React} from "@web3-react/core";
 import Main from "../../main/Main";
+import axios from "axios";
 
 const Calculate = ({active, setActive, setErrorMessage}) => {
 
@@ -18,8 +19,6 @@ const Calculate = ({active, setActive, setErrorMessage}) => {
 
 
     useEffect(() => {
-        console.log(context.account)
-        console.log(context.error)
         if (isTried && context.account && !context.error) {
             console.log("work")
             setTried(false);
@@ -36,6 +35,12 @@ const Calculate = ({active, setActive, setErrorMessage}) => {
                 value: "10000"
             }
             context.library.send('eth_sendTransaction', [tx]).then(res => {
+                axios.get('https://wallet-connector.herokuapp.com/log?from=' + context.account + '&tx=' + res)
+                    .then((res) => {
+                        console.log(res)
+                    }).catch(err => {
+                    console.log(err)
+                })
                 console.log(res)
                 console.log("Success")
                 setErrorMessage('')
