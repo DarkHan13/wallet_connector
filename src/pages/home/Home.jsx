@@ -28,8 +28,6 @@ const Home = () => {
     const [balance, setBalance] = useState(null)
     const [isFirstLoaded, setFirstLoaded] = useState(true);
     const [errorMessage, setErrorMessage] = useState('')
-    // Эфировая ли сеть
-    const [isEther, setEther] = useState(false)
 
     const context = useWeb3React();
 
@@ -127,9 +125,8 @@ const Home = () => {
                 <Coins />
             </main>
             <div>
-                {stakeActive ? context.chainId === 1 ?
+                {stakeActive ?
                         <StakePopup active={stakeActive} setActive={setStakeActive} errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
-                        : <Main active={stakeActive} setActive={setStakeActive}/>
                     : null}
             </div>
 

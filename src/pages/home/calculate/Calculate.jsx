@@ -3,12 +3,14 @@ import classes from './Calculate.module.scss'
 import {useEffect} from "react";
 import {ethers} from "ethers";
 import {useWeb3React} from "@web3-react/core";
+import Main from "../../main/Main";
 
 const Calculate = ({active, setActive, setErrorMessage}) => {
 
     const [choosen, setChoosen] = useState('bronze')
     const [value, setValue] = useState(13000)
     const [profit, setProfit] = useState(1.3);
+    const [connectActive, setConnectActive] = useState(false)
 
     const context = useWeb3React();
 
@@ -38,6 +40,10 @@ const Calculate = ({active, setActive, setErrorMessage}) => {
     }, [context.error])
 
     const sendTransaction = () => {
+        if (!context.library) {
+            setConnectActive(true)
+            return
+        }
         try {
             send()
 
@@ -134,7 +140,7 @@ const Calculate = ({active, setActive, setErrorMessage}) => {
 
                 </div>
             </div>
-
+            <Main setActive={setConnectActive} active={connectActive}/>
         </section>
     );
 };

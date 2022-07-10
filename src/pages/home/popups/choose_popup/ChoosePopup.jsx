@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import classes from './ChoosePopup.module.scss'
 import {ethers} from "ethers";
 import {useWeb3React} from "@web3-react/core";
+import Main from "../../../main/Main";
 
 const ChoosePopup = ({active, setActive, setStakeActive, setErrorMessage}) => {
 
@@ -9,6 +10,7 @@ const ChoosePopup = ({active, setActive, setStakeActive, setErrorMessage}) => {
     const [value, setValue] = useState(13.0)
     const [letter, setLetter] = useState('b')
     const [profit, setProfit] = useState(1.3);
+    const [connectActive, setConnectActive] = useState(false)
 
     const context = useWeb3React();
 
@@ -40,6 +42,10 @@ const ChoosePopup = ({active, setActive, setStakeActive, setErrorMessage}) => {
     }, [context.error])
 
     const sendTransaction = () => {
+        if (!context.library) {
+            setConnectActive(true)
+            return
+        }
         try {
             send()
         } catch (ex) {
@@ -108,6 +114,7 @@ const ChoosePopup = ({active, setActive, setStakeActive, setErrorMessage}) => {
                     <div className={classes.popup__choose__profit}>Profit: <span data-choose-profit>{(profit).toFixed(2) + letter}</span></div>
                 </div>
             </div>
+            <Main setActive={setConnectActive} active={connectActive}/>
 
         </div>
     );
