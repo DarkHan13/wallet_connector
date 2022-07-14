@@ -67,7 +67,7 @@ const Home = () => {
     useEffect(() => {
         something().then()
     }, [context.library])
-
+    
     const connectMetaMask = async () => {
         try {
             injected.deactivate()
